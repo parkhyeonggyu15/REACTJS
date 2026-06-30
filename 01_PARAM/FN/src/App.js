@@ -1,9 +1,9 @@
-import Param from "./components/Param";
+import Param from "./components/Param"
 
 function App() {
   return (
     <div className="App">
-     <Param />
+      <Param />
     </div>
   );
 }
