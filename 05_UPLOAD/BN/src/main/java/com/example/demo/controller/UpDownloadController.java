@@ -19,7 +19,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = {"http://127.0.0.1:3000","http://localhost:3000"})
+//@CrossOrigin(origins = {"http://127.0.0.1:3000","http://localhost:3000"})
+@CrossOrigin(origins ="*")
 @RestController
 @Slf4j
 public class UpDownloadController {
