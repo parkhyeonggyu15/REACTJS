@@ -47,12 +47,15 @@ public class SecurityConfig {
         //CSRF 비활성화(비활성화하지 않으면 logout 요청은 기본적으로 POST방식을 따른다)
         http.csrf((config)->{config.disable();});
 
+        //CORS 설정 적용
+        http.cors((config)->{config.configurationSource(corsConfigurationSource());});
+
         //권한처리
         http.authorizeHttpRequests((auth)->{
             //정적경로 매핑
             auth.requestMatchers("/favicon.ico").permitAll();
 
-            auth.requestMatchers("/","/join","/login").permitAll();
+            auth.requestMatchers("/","/join","/login","/validate").permitAll();
             //
             auth.requestMatchers("/user").hasAnyRole("USER","ADMIN"); //
             auth.requestMatchers("/manager").hasAnyRole("MANAGER"); //
@@ -98,28 +101,6 @@ public class SecurityConfig {
 
         return http.build();
     }
-
-
-    // 임시계정 생성
-//    @Bean
-//    UserDetailsService users() {
-//        UserDetails user = User.withUsername("user")
-//                .password("{noop}1234")   // 비밀번호 인코딩 없음 (실습용)
-//                .roles("USER")            // ROLE_USER
-//                .build();
-//
-//        UserDetails manager = User.withUsername("manager")
-//                .password("{noop}1234")
-//                .roles("MANAGER")         // ROLE_MANAGER
-//                .build();
-//
-//        UserDetails admin = User.withUsername("admin")
-//                .password("{noop}1234")
-//                .roles("ADMIN")           // ROLE_ADMIN
-//                .build();
-//
-//        return new InMemoryUserDetailsManager(user, manager, admin);
-//    }
 
 
     @Bean
